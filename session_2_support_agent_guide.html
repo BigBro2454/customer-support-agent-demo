@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Support Router Agent - Session 2 Guide</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10.6.1/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({
+            theme: 'dark',
+            themeVariables: {
+                background: '#161b27',
+                primaryColor: '#60a5fa',
+                secondaryColor: '#a78bfa',
+                tertiaryColor: '#161b27',
+                fontFamily: 'Inter',
+                lineColor: '#8892a4',
+                textColor: '#e2e8f0'
+            }
+        });
+    </script>
+
+    <style>
+        /* CSS Variables */
+        :root {
+            --bg: #0f1117;
+            --surface: #161b27;
+            --text: #e2e8f0;
+            --muted: #8892a4;
+            
+            --purple: #a78bfa;
+            --blue: #60a5fa;
+            --amber: #fbbf24;
+            --teal: #34d399;
+            --rose: #f87171;
+            
+            --purple-bg: rgba(167, 139, 250, 0.1);
+            --blue-bg: rgba(96, 165, 250, 0.1);
+            --amber-bg: rgba(251, 191, 36, 0.1);
+            --teal-bg: rgba(52, 211, 153, 0.1);
+            --rose-bg: rgba(248, 113, 113, 0.1);
+            
+            --border: #2a3141;
+            
+            --font-sans: 'Inter', system-ui, sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* Reset & Base */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            display: flex;
+        }
+        a { color: var(--blue); text-decoration: none; }
+        a:hover { text-decoration: underline; }
+        
+        /* Layout */
+        .sidebar {
+            width: 240px;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            padding: 2rem 1.5rem;
+            border-right: 1px solid var(--border);
+            overflow-y: auto;
+            background: var(--bg);
+        }
+        .main-content {
+            flex: 1;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 3rem 2.5rem;
+        }
+        
+        /* Sidebar Nav */
+        .sidebar-title {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--muted);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+        .nav-list { list-style: none; }
+        .nav-item { margin-bottom: 0.75rem; }
+        .nav-link {
+            color: var(--text);
+            font-size: 0.95rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+        .nav-link:hover { opacity: 1; text-decoration: none; }
+        
+        .dot { width: 8px; height: 8px; border-radius: 50%; }
+        .dot.purple { background: var(--purple); }
+        .dot.blue { background: var(--blue); }
+        .dot.teal { background: var(--teal); }
+        .dot.amber { background: var(--amber); }
+        .dot.rose { background: var(--rose); }
+
+        /* Typography */
+        h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 0.5rem; letter-spacing: -0.02em; }
+        h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 1rem; margin-top: 3rem; display: flex; align-items: center; gap: 0.75rem;}
+        h3 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
+        p { margin-bottom: 1.5rem; color: var(--muted); }
+        strong { color: var(--text); }
+        
+        /* Hero Section */
+        .badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            margin-bottom: 1.5rem;
+        }
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .hero-desc {
+            font-size: 1.05rem;
+            max-width: 90%;
+        }
+        .tech-pills {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        .tech-pill {
+            background: rgba(255,255,255,0.05);
+            padding: 0.2rem 0.6rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            color: var(--muted);
+            font-family: var(--font-mono);
+        }
+
+        /* Section Icons */
+        .sec-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 8px;
+            font-size: 1.2rem;
+        }
+        .bg-purple { background: var(--purple-bg); color: var(--purple); }
+        .bg-blue { background: var(--blue-bg); color: var(--blue); }
+        .bg-teal { background: var(--teal-bg); color: var(--teal); }
+        .bg-amber { background: var(--amber-bg); color: var(--amber); }
+        .bg-rose { background: var(--rose-bg); color: var(--rose); }
+
+        /* Cards */
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+        }
+        .card.border-top-purple { border-top: 4px solid var(--purple); }
+        .card.border-top-teal { border-top: 4px solid var(--teal); }
+        .card.border-top-blue { border-top: 4px solid var(--blue); }
+        .card.border-top-amber { border-top: 4px solid var(--amber); }
+        
+        .card-title { font-weight: 600; color: var(--text); margin-bottom: 0.5rem; font-size: 1.05rem; display: flex; align-items: center; gap: 0.5rem;}
+        .card-body { font-size: 0.95rem; color: var(--muted); margin: 0;}
+
+        /* Code Blocks */
+        pre {
+            background: #0d1017;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-mono);
+            font-size: 0.85rem;
+        }
+        code {
+            font-family: var(--font-mono);
+        }
+        .code-inline {
+            background: rgba(255,255,255,0.1);
+            padding: 0.1rem 0.3rem;
+            border-radius: 4px;
+            font-size: 0.85em;
+        }
+
+        /* Mermaid container */
+        .mermaid-container {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 350px;
+            overflow-x: auto;
+            overflow-y: visible;
+        }
+        .mermaid-container .mermaid {
+            min-width: 600px;
+            width: 100%;
+        }
+        .mermaid-container .mermaid svg {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            min-height: 300px;
+        }
+
+        /* Layers (Autonomy Spectrum) */
+        .layer {
+            border-radius: 8px;
+            border: 1px solid var(--border);
+            margin-bottom: 1rem;
+            overflow: hidden;
+        }
+        .layer-header {
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            color: #111;
+        }
+        .layer-body {
+            background: var(--surface);
+            padding: 1rem;
+        }
+        .layer-body ul {
+            list-style: none;
+        }
+        .layer-body li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--muted);
+            font-size: 0.95rem;
+        }
+        .layer-body li::before {
+            content: "•";
+            position: absolute;
+            left: 0.5rem;
+            color: var(--text);
+        }
+
+        /* Callouts */
+        .callout {
+            padding: 1rem 1.25rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            border-left: 4px solid;
+        }
+        .callout.info { background: var(--blue-bg); border-left-color: var(--blue); color: #bfdbfe; }
+        .callout.warn { background: var(--amber-bg); border-left-color: var(--amber); color: #fde68a; }
+
+        /* Schema Box */
+        .schema-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+        }
+        .schema-field {
+            padding: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .schema-field:last-child { border-bottom: none; }
+        .schema-name { font-weight: 600; color: var(--purple); font-family: var(--font-mono); font-size: 0.9rem;}
+        .schema-type { color: var(--muted); font-size: 0.8rem; margin-left: 0.5rem; padding: 0.1rem 0.4rem; background: rgba(255,255,255,0.05); border-radius: 4px; }
+        .schema-desc { margin-top: 0.5rem; font-size: 0.9rem; margin-bottom: 0;}
+
+        /* Concept Blocks */
+        .concept-block {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .concept-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+        .concept-badge {
+            background: var(--amber-bg);
+            color: var(--amber);
+            font-weight: 700;
+            font-family: var(--font-mono);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+        }
+        .concept-title { font-weight: 600; font-size: 1.1rem; color: var(--text); }
+        .concept-desc { margin-bottom: 1rem; font-size: 0.95rem;}
+        .concept-block pre { margin-bottom: 0; }
+
+        /* Tables */
+        .table-container {
+            width: 100%;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+        th, td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        th {
+            background: var(--surface);
+            color: var(--text);
+            font-weight: 600;
+        }
+        td { color: var(--muted); }
+        
+        /* Snippet Blocks */
+        .snippet-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        @media (min-width: 1024px) {
+            .snippet-grid { grid-template-columns: 3fr 2fr; align-items: start;}
+        }
+        .snippet-wrapper {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            overflow: hidden;
+        }
+        .snippet-header {
+            background: rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .snippet-badge { font-size: 0.75rem; font-weight: 700; color: var(--blue); letter-spacing: 0.05em; }
+        .snippet-file { font-size: 0.8rem; font-family: var(--font-mono); color: var(--muted); }
+        .snippet-body { display: flex; flex-direction: column; }
+        @media (min-width: 768px) {
+            .snippet-body { flex-direction: row; }
+        }
+        .snippet-code { flex: 1.5; padding: 1rem; background: #0d1017; overflow-x: auto; }
+        .snippet-code pre { margin: 0; padding: 0; border: none; background: transparent; }
+        .snippet-desc { flex: 1; padding: 1rem; font-size: 0.9rem; border-top: 1px solid var(--border); }
+        @media (min-width: 768px) {
+            .snippet-desc { border-top: none; border-left: 1px solid var(--border); }
+        }
+
+        /* Flow Steps */
+        .flow-step {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .flow-step::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0.25rem;
+            bottom: -1.75rem;
+            width: 2px;
+            background: var(--border);
+        }
+        .flow-step:last-child::before { display: none; }
+        .flow-step::after {
+            content: "";
+            position: absolute;
+            left: -4px;
+            top: 0.35rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--teal);
+            box-shadow: 0 0 0 4px var(--bg);
+        }
+        .step-amber::after { background: var(--amber); }
+        
+        .flow-title { font-weight: 600; color: var(--text); margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .flow-body { font-size: 0.95rem; color: var(--muted); margin-bottom: 0;}
+        .flow-step pre { margin-top: 0.5rem; margin-bottom: 0; }
+
+        /* Tree */
+        .tree-pre {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            line-height: 1.5;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .sidebar { display: none; }
+            .card-grid-2 { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <div class="sidebar-title">Sections</div>
+        <ul class="nav-list">
+            <li class="nav-item"><a href="#overview" class="nav-link"><span class="dot purple"></span> Overview</a></li>
+            <li class="nav-item"><a href="#figurative" class="nav-link"><span class="dot blue"></span> The Agent Figuratively</a></li>
+            <li class="nav-item"><a href="#autonomy" class="nav-link"><span class="dot teal"></span> Autonomy Spectrum</a></li>
+            <li class="nav-item"><a href="#architecture" class="nav-link"><span class="dot purple"></span> Architecture</a></li>
+            <li class="nav-item"><a href="#concepts" class="nav-link"><span class="dot amber"></span> Key Concepts</a></li>
+            <li class="nav-item"><a href="#test-cases" class="nav-link"><span class="dot rose"></span> Test Cases</a></li>
+            <li class="nav-item"><a href="#code" class="nav-link"><span class="dot blue"></span> Code Walkthrough</a></li>
+            <li class="nav-item"><a href="#antigravity" class="nav-link"><span class="dot teal"></span> Build in Antigravity</a></li>
+            <li class="nav-item"><a href="#failures" class="nav-link"><span class="dot rose"></span> Failure Modes</a></li>
+            <li class="nav-item"><a href="#demo" class="nav-link"><span class="dot amber"></span> Demo Script</a></li>
+        </ul>
+    </aside>
+
+    <main class="main-content">
+        
+        <!-- HERO -->
+        <header style="margin-bottom: 4rem;">
+            <div class="badge">Architecture &middot; System Design</div>
+            <h1>Customer Support Router Agent</h1>
+            <div class="hero-subtitle">Live Demo — AI Problem Deconstruction & Rapid Prototyping</div>
+            <p class="hero-desc text-muted">A working AI agent that classifies customer support tickets, retrieves relevant policies from a vector store, decides whether to resolve autonomously or escalate to a human — and logs every decision to an audit trail. This guide deconstructs the agent into its wire-level components and shows how an AI PM thinks about building production-grade autonomous systems.</p>
+            <div class="tech-pills">
+                <span class="tech-pill">Gemini 2.5 Flash</span>
+                <span class="tech-pill">Pydantic</span>
+                <span class="tech-pill">ChromaDB</span>
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Structured Output</span>
+            </div>
+        </header>
+
+        <!-- OVERVIEW -->
+        <section id="overview">
+            <h2>
+                <span class="sec-icon bg-purple">🧭</span>
+                Why This Demo?
+            </h2>
+            
+            <div class="card-grid-2">
+                <div class="card border-top-purple">
+                    <div class="card-title">Point 1 — Problem Deconstruction</div>
+                    <p class="card-body">We deconstruct 'build a customer support bot' from vague business request &rarr; Wire-level components (Perception, Memory, Reasoning, Action) &rarr; State Schemas &rarr; Guardrails &rarr; Autonomy Dial</p>
+                </div>
+                <div class="card border-top-teal">
+                    <div class="card-title">Point 2 — Rapid Prototyping</div>
+                    <p class="card-body">We run the actual working prototype live, showing Pydantic structured output, ChromaDB vector retrieval, confidence-based routing, and audit trails — all in ~200 lines of Python</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- FIGURATIVE -->
+        <section id="figurative">
+            <h2>
+                <span class="sec-icon bg-blue">🧠</span>
+                What Does This Agent Look Like?
+            </h2>
+            <h3>The Mental Model</h3>
+            <p>Imagine a human support agent sitting at a desk. They have ears & eyes (read the message, detect mood), a policy binder (flip to the right page), a brain with judgment (can I handle this or do I need a manager?), and hands & a phone (resolve or escalate). Now replace the human with an AI agent. The architecture is identical.</p>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                    graph TD
+                        MSG["📩 Customer Message"] --> PERCEPT["👂 Perception\nperception.py"]
+                        PERCEPT -->|"Intent, Sentiment,\nEntities, Urgency"| MEM["📚 Memory\nmemory.py"]
+                        MEM -->|"Top-K Relevant\nPolicy Documents"| REASON["🧠 Reasoning\nreasoning.py"]
+                        REASON --> DECIDE{"Confidence\n≥ 0.70?"}
+                        DECIDE -->|"High confidence\n+ Low risk"| RESOLVE["✅ Auto-Resolve\nStripe / SendGrid API"]
+                        DECIDE -->|"Low confidence\nOR High risk"| ESCALATE["🚨 Escalate to Human\nZendesk Ticket"]
+                        RESOLVE --> AUDIT["📝 Audit Trail\naudit_trail.jsonl"]
+                        ESCALATE --> AUDIT
+                </div>
+            </div>
+
+            <div class="card-grid-2">
+                <div class="card border-top-purple">
+                    <div class="card-title">👂 Perception <span class="schema-type">perception.py</span></div>
+                    <p class="card-body">LLM-powered intent classifier. Extracts intent (refund, password_reset, billing, unknown), sentiment (neutral &rarr; angry), urgency (low/med/high), and entities (order_id, amount, email) using Pydantic structured output.</p>
+                </div>
+                <div class="card border-top-blue">
+                    <div class="card-title">📚 Memory <span class="schema-type">memory.py</span></div>
+                    <p class="card-body">ChromaDB vector store loaded at startup with 4 knowledge base articles. At runtime, semantic search retrieves only the top-2 most relevant policy documents — saving tokens and improving accuracy.</p>
+                </div>
+                <div class="card border-top-amber">
+                    <div class="card-title">🧠 Reasoning <span class="schema-type">reasoning.py</span></div>
+                    <p class="card-body">Decision engine that compares intent against retrieved policies. Outputs confidence score (0.0–1.0). Critical: post-LLM hardcoded guardrail forces escalation if confidence &lt; 0.70, even if the LLM says 'resolve'.</p>
+                </div>
+                <div class="card border-top-teal">
+                    <div class="card-title">⚡ Action <span class="schema-type">action.py</span></div>
+                    <p class="card-body">Executes the decision: mock Stripe refund or SendGrid password reset for resolves, mock Zendesk ticket creation for escalations. Every single decision is logged to audit_trail.jsonl (episodic memory).</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- AUTONOMY -->
+        <section id="autonomy">
+            <h2>
+                <span class="sec-icon bg-teal">🎚️</span>
+                The Autonomy Spectrum
+            </h2>
+            <p>This agent doesn't have a binary ON/OFF switch. It operates on a graduated autonomy dial — the single most important concept for an AI PM. High-stakes actions require human oversight; low-risk routine tasks are handled autonomously.</p>
+
+            <div class="layer">
+                <div class="layer-header" style="background: #34d399;">🟢 ZONE GREEN — Fully Autonomous</div>
+                <div class="layer-body">
+                    <ul>
+                        <li>Password resets (clear match, low risk)</li>
+                        <li>FAQ answers (exact knowledge base match)</li>
+                        <li>Small refunds ≤ $50 (within policy threshold)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layer">
+                <div class="layer-header" style="background: #fbbf24;">🟡 ZONE YELLOW — Supervised / Approval Required</div>
+                <div class="layer-body">
+                    <ul>
+                        <li>Medium refunds $50–$200 (agent proposes, human approves)</li>
+                        <li>Account changes (agent summarizes, human confirms)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layer">
+                <div class="layer-header" style="background: #f87171;">🔴 ZONE RED — Mandatory Human Escalation</div>
+                <div class="layer-body">
+                    <ul>
+                        <li>Refunds > $200 (too high-risk for automation)</li>
+                        <li>Angry sentiment + legal threats</li>
+                        <li>Unknown intents (no policy match)</li>
+                        <li>Account deletion requests</li>
+                        <li>Agent confidence &lt; 0.70 threshold</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="callout info">
+                <strong>Key Insight:</strong> The agent's guardrail is not in the LLM prompt alone. There is a hardcoded post-LLM confidence override in <code>reasoning.py</code> (lines 77-80): even if the LLM says 'resolve,' if the confidence is below 0.70, the code forces escalation. This is the difference between a toy demo and a production agent.
+            </div>
+        </section>
+
+        <!-- ARCHITECTURE -->
+        <section id="architecture">
+            <h2>
+                <span class="sec-icon bg-purple">🏗️</span>
+                System Architecture
+            </h2>
+            
+            <div class="mermaid-container" style="min-height: 450px;">
+                <div class="mermaid">
+                    graph TD
+                        subgraph Input["📩 Input Layer"]
+                            A["Customer Message"]
+                        end
+                        subgraph Pipeline["⚙️ 4-Component Pipeline"]
+                            B["👂 perception.py\nGemini + Pydantic"]
+                            C["📚 memory.py\nChromaDB Vector Store"]
+                            D["🧠 reasoning.py\nDecision + Guardrail"]
+                        end
+                        subgraph Output["📤 Output Layer"]
+                            E["⚡ action.py\nResolve / Escalate"]
+                            F["📝 audit_trail.jsonl\nEpisodic Memory"]
+                        end
+                        A --> B
+                        B --> C
+                        C --> D
+                        D --> E
+                        E --> F
+                </div>
+            </div>
+
+            <div class="schema-box">
+                <div class="schema-field">
+                    <div class="schema-name">MessageIntent <span class="schema-type">Pydantic BaseModel</span></div>
+                    <p class="schema-desc">intent: str, urgency: str, sentiment: str, entities: {order_id, amount, email}</p>
+                </div>
+                <div class="schema-field">
+                    <div class="schema-name">AgentDecision <span class="schema-type">Pydantic BaseModel</span></div>
+                    <p class="schema-desc">action_type: Literal['resolve','escalate'], confidence: float, rationale: str, action_parameters: dict</p>
+                </div>
+                <div class="schema-field">
+                    <div class="schema-name">Knowledge Base <span class="schema-type">ChromaDB Collection</span></div>
+                    <p class="schema-desc">4 markdown docs embedded at startup: refund-policy.md, escalation-rules.md, password-reset.md, billing-faq.md</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONCEPTS -->
+        <section id="concepts">
+            <h2>
+                <span class="sec-icon bg-amber">💡</span>
+                Key Technical & Functional Concepts
+            </h2>
+
+            <div class="concept-block">
+                <div class="concept-header">
+                    <span class="concept-badge">01</span>
+                    <div class="concept-title">Structured Output via Pydantic</div>
+                </div>
+                <p class="concept-desc">The LLM never returns raw text that we regex-parse. Every response is forced into a strict Pydantic schema. This means: no ambiguous outputs, engineering never debates 'what did the model mean?', and every response is unit-testable.</p>
+                <pre><code class="language-python">class MessageIntent(BaseModel):
+    intent: str       # "refund", "password_reset", "billing_question", "unknown"
+    urgency: str      # "low", "medium", "high"
+    sentiment: str    # "positive", "neutral", "negative", "angry"
+    entities: ExtractedEntities  # { order_id, amount, email }</code></pre>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-header">
+                    <span class="concept-badge">02</span>
+                    <div class="concept-title">Semantic Memory via Vector Store</div>
+                </div>
+                <p class="concept-desc">The agent doesn't stuff all 4 policy documents into the prompt every time (that wastes tokens). Instead, at startup all markdown files are embedded into ChromaDB. At runtime, only the top-2 most relevant documents are retrieved via semantic search. For an enterprise with 500+ merchant policies, this pattern is mandatory.</p>
+                <pre><code class="language-python"># Startup: embed all knowledge base docs
+self.collection.add(documents=documents, metadatas=metadatas, ids=ids)
+
+# Runtime: retrieve only relevant policies
+results = self.collection.query(query_texts=[query], n_results=2)</code></pre>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-header">
+                    <span class="concept-badge">03</span>
+                    <div class="concept-title">Post-LLM Hardcoded Guardrail</div>
+                </div>
+                <p class="concept-desc">The LLM generates a confidence score, but LLMs can be overconfident. So there's a hardcoded programmatic override after the LLM responds. Never rely on the LLM alone for safety-critical decisions. Deterministic code wraps probabilistic model. The threshold (0.70) is a PM-defined business constant, not an engineering detail.</p>
+                <pre><code class="language-python"># Post-LLM hardcoded safeguard: enforce confidence threshold programmatically
+if decision.action_type == "resolve" and decision.confidence < CONFIG["CONFIDENCE_THRESHOLD"]:
+    print("⚠️ OVERRIDE: LLM suggested resolve, but confidence too low. Forcing escalation.")
+    decision.action_type = "escalate"</code></pre>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-header">
+                    <span class="concept-badge">04</span>
+                    <div class="concept-title">Episodic Memory / Audit Trail</div>
+                </div>
+                <p class="concept-desc">Every single decision — resolve or escalate — gets written to a JSONL audit log. For financial and enterprise products, you need a full audit trail of why the AI made each decision. These logs become your eval dataset: replay 100 past decisions and ask 'Would prompt v2 have been better than v1?'</p>
+                <pre><code class="language-json">{
+  "timestamp": "2026-08-25T23:30:00",
+  "message": "I demand a refund of $150!",
+  "parsed_intent": { "intent": "refund", "urgency": "high", "sentiment": "angry" },
+  "decision": { "action_type": "escalate", "confidence": 0.65, "rationale": "..." }
+}</code></pre>
+            </div>
+
+            <div class="concept-block">
+                <div class="concept-header">
+                    <span class="concept-badge">05</span>
+                    <div class="concept-title">Temperature Tuning by Task Type</div>
+                </div>
+                <p class="concept-desc">Different tasks need different temperature settings. Classification/routing tasks use temperature=0.1 for maximum determinism. Reasoning/rationale generation uses temperature=0.2 for slightly more natural explanations. Never use high temperature for structured extraction.</p>
+                <pre><code class="language-python"># perception.py — Classification: near-zero temperature
+"temperature": 0.1  # Deterministic intent classification
+
+# reasoning.py — Reasoning: slightly higher for natural rationale
+"temperature": 0.2  # Logical but readable explanations</code></pre>
+            </div>
+        </section>
+
+        <!-- TEST CASES -->
+        <section id="test-cases">
+            <h2>
+                <span class="sec-icon bg-rose">🧪</span>
+                The 6 Test Cases
+            </h2>
+            <p>The agent ships with 6 pre-built test cases that cover the full autonomy spectrum — from happy-path auto-resolution to mandatory human escalation.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Test Message</th>
+                            <th>Expected Behavior</th>
+                            <th>Zone</th>
+                            <th>What It Teaches</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>"I forgot my password for john.doe@example.com"</td>
+                            <td>🟢 Auto-Resolve — Password reset via SendGrid</td>
+                            <td>Green</td>
+                            <td>Happy path. Agent handles autonomously.</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>"I need a refund for order #9999, $30"</td>
+                            <td>🟢 Auto-Resolve — Refund ≤ $50 threshold via Stripe</td>
+                            <td>Green</td>
+                            <td>Policy-bounded autonomy.</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>"I demand a refund! Order #8888, $150, terrible service!"</td>
+                            <td>🟡 Escalate — Amount $50-$200, angry sentiment</td>
+                            <td>Yellow</td>
+                            <td>Amount + sentiment = escalation.</td>
+                        </tr>
+                        <tr>
+                            <td>4</td>
+                            <td>"Refund order #7777, $300"</td>
+                            <td>🔴 Mandatory Escalate — Amount > $200</td>
+                            <td>Red</td>
+                            <td>Hard guardrail: no model discretion.</td>
+                        </tr>
+                        <tr>
+                            <td>5</td>
+                            <td>"How do I update my credit card?"</td>
+                            <td>🟢 Auto-Resolve — FAQ answer, directs to dashboard</td>
+                            <td>Green</td>
+                            <td>Read-only response from KB.</td>
+                        </tr>
+                        <tr>
+                            <td>6</td>
+                            <td>"Delete my account and all my data right now."</td>
+                            <td>🔴 Escalate — Irreversible high-risk action</td>
+                            <td>Red</td>
+                            <td>Forbidden Actions concept.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- CODE WALKTHROUGH -->
+        <section id="code">
+            <h2>
+                <span class="sec-icon bg-blue">💻</span>
+                Code Walkthrough
+            </h2>
+
+            <div class="snippet-wrapper">
+                <div class="snippet-header">
+                    <span class="snippet-badge">PERCEPTION</span>
+                    <span class="snippet-file">src/perception.py</span>
+                </div>
+                <div class="snippet-body">
+                    <div class="snippet-code">
+                        <pre><code>response = self.client.models.generate_content(
+    model=CONFIG["MODEL_NAME"],
+    contents=prompt,
+    config={
+        "response_mime_type": "application/json",
+        "response_schema": MessageIntent,
+        "temperature": 0.1,
+    },
+)
+return MessageIntent.model_validate_json(response.text)</code></pre>
+                    </div>
+                    <div class="snippet-desc">
+                        Calls Gemini with <code>response_mime_type='application/json'</code> and <code>response_schema=MessageIntent</code>. The model is forced to return valid JSON matching the Pydantic schema. <code>model_validate_json()</code> parses and validates — if the model returns garbage, it throws an error instead of silently corrupting downstream.
+                    </div>
+                </div>
+            </div>
+
+            <div class="snippet-wrapper">
+                <div class="snippet-header">
+                    <span class="snippet-badge">MEMORY</span>
+                    <span class="snippet-file">src/memory.py</span>
+                </div>
+                <div class="snippet-body">
+                    <div class="snippet-code">
+                        <pre><code>self.collection.add(
+    documents=documents,
+    metadatas=metadatas,
+    ids=ids
+)
+# ChromaDB auto-embeds using all-MiniLM-L6-v2 (local, free, fast)
+
+# Runtime retrieval
+results = self.collection.query(
+    query_texts=[query],
+    n_results=n_results
+)</code></pre>
+                    </div>
+                    <div class="snippet-desc">
+                        At startup, all .md files from knowledge-base/ are loaded into ChromaDB. ChromaDB automatically handles embedding using its default model (all-MiniLM-L6-v2 — runs locally, free, fast). At runtime, semantic search returns only the top-K most relevant documents.
+                    </div>
+                </div>
+            </div>
+
+            <div class="snippet-wrapper">
+                <div class="snippet-header">
+                    <span class="snippet-badge">REASONING</span>
+                    <span class="snippet-file">src/reasoning.py</span>
+                </div>
+                <div class="snippet-body">
+                    <div class="snippet-code">
+                        <pre><code>decision = AgentDecision.model_validate_json(response.text)
+
+# Post-LLM hardcoded safeguard
+if decision.action_type == "resolve" and decision.confidence < CONFIG["CONFIDENCE_THRESHOLD"]:
+    print("⚠️ OVERRIDE: Forcing escalation.")
+    decision.action_type = "escalate"
+    decision.rationale = f"Agent override: Confidence ({decision.confidence}) below threshold."
+
+return decision</code></pre>
+                    </div>
+                    <div class="snippet-desc">
+                        The LLM outputs its best judgment. But the code has final say. If confidence is below the PM-defined threshold (0.70), the decision is programmatically overridden to 'escalate' — regardless of what the LLM said. This is Defense in Depth.
+                    </div>
+                </div>
+            </div>
+
+            <div class="snippet-wrapper">
+                <div class="snippet-header">
+                    <span class="snippet-badge">ACTION</span>
+                    <span class="snippet-file">src/action.py</span>
+                </div>
+                <div class="snippet-body">
+                    <div class="snippet-code">
+                        <pre><code>def execute(self, original_message, intent, decision):
+    if decision.action_type == "resolve":
+        self._handle_resolve(intent, decision)   # Mock Stripe/SendGrid
+    else:
+        self._handle_escalate(original_message, intent, decision)  # Mock Zendesk
+    self._log_audit(original_message, intent, decision)  # ALWAYS log</code></pre>
+                    </div>
+                    <div class="snippet-desc">
+                        Regardless of resolve or escalate, every decision is logged to <code>audit_trail.jsonl</code>. This creates episodic memory — vital for compliance, debugging, and building evaluation datasets for prompt improvement.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- BUILD IN ANTIGRAVITY -->
+        <section id="antigravity">
+            <h2>
+                <span class="sec-icon bg-teal">🚀</span>
+                How to Build & Run This
+            </h2>
+            
+            <div class="flow-step">
+                <div class="flow-title">Step 1: Set your API key</div>
+                <pre><code>export GEMINI_API_KEY="your-api-key-here"</code></pre>
+            </div>
+            <div class="flow-step">
+                <div class="flow-title">Step 2: Install dependencies</div>
+                <pre><code>pip install google-genai chromadb pydantic python-dotenv</code></pre>
+            </div>
+            <div class="flow-step">
+                <div class="flow-title">Step 3: Run the agent</div>
+                <pre><code>cd mentorship/demos/customer-support-agent-demo
+python -m src.main</code></pre>
+            </div>
+            <div class="flow-step">
+                <div class="flow-title">Step 4: Explore in Antigravity IDE</div>
+                <p class="flow-body">Open any source file in Antigravity IDE sidebar chat and ask: 'Walk me through how the confidence guardrail works' or 'Add a test case for a customer threatening legal action over a $25 refund.' Use the /plan command to have Antigravity design modifications.</p>
+            </div>
+        </section>
+
+        <!-- FAILURE MODES -->
+        <section id="failures">
+            <h2>
+                <span class="sec-icon bg-rose">🚨</span>
+                Failure Modes & Debugging
+            </h2>
+            <p>When an agent misbehaves, debug from the outside in. Check Perception first &rarr; then Memory &rarr; then Reasoning &rarr; then Action. The model is almost never the problem.</p>
+            
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Failure Mode</th>
+                            <th>Component</th>
+                            <th>Description</th>
+                            <th>Fix</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Misclassified Intent</td>
+                            <td>Perception</td>
+                            <td>Agent classifies 'delete my account' as 'billing_question'</td>
+                            <td>Improve system prompt examples or add few-shot classification examples</td>
+                        </tr>
+                        <tr>
+                            <td>Wrong Policy Retrieved</td>
+                            <td>Memory</td>
+                            <td>Returns billing FAQ when customer asked about refund</td>
+                            <td>Improve document chunking, add metadata filters, increase n_results</td>
+                        </tr>
+                        <tr>
+                            <td>Overconfident Autonomy</td>
+                            <td>Reasoning</td>
+                            <td>LLM says confidence 0.95 on an ambiguous case</td>
+                            <td>Post-LLM guardrail: hardcoded threshold override (0.70). Never trust LLM confidence alone.</td>
+                        </tr>
+                        <tr>
+                            <td>Silent Audit Gap</td>
+                            <td>Action</td>
+                            <td>Executes refund but forgets to log it</td>
+                            <td>Audit logging is in the execute() method, not in resolve/escalate — it always runs.</td>
+                        </tr>
+                        <tr>
+                            <td>Stale Context</td>
+                            <td>Memory</td>
+                            <td>Agent uses outdated policy from cached retrieval</td>
+                            <td>Recreate ChromaDB collection on startup (as implemented) or add TTL/versioning.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="callout warn">
+                <strong>Rule of Thumb:</strong> 90% of production agent failures are NOT model intelligence failures — they are plumbing failures in Perception, Action, or Memory. Always check the wiring before blaming the model.
+            </div>
+        </section>
+
+        <!-- DEMO SCRIPT -->
+        <section id="demo">
+            <h2>
+                <span class="sec-icon bg-amber">🎬</span>
+                15-Minute Live Demo Script
+            </h2>
+
+            <div class="flow-step step-amber">
+                <div class="flow-title">Step 1: Opening (2 mins)</div>
+                <p class="flow-body">"Imagine an enterprise customer support queue handling 500+ tickets daily. The operations team is overwhelmed. Leadership requests an AI support agent. Instead of jumping into prompt hacking, let's deconstruct the system into structured perception, memory, reasoning, and action boundaries."</p>
+            </div>
+            <div class="flow-step step-amber">
+                <div class="flow-title">Step 2: Deconstruct the Problem (5 mins)</div>
+                <p class="flow-body">Walk through the 4-component architecture diagram. Ask core design questions: (1) 'If this agent erroneously authorizes a refund, what is the blast radius?' (2) 'Which decisions are safe for autonomous execution versus mandatory human handoff?' (3) 'Should business calculation be delegated to LLMs or deterministic software?'</p>
+            </div>
+            <div class="flow-step step-amber">
+                <div class="flow-title">Step 3: Run the Live Agent (5 mins)</div>
+                <p class="flow-body">Run <code>python -m src.main</code> and step through each test case. Inspect the confidence scores, policy retrieval accuracy, and how the autonomy dial adjusts behavior dynamically.</p>
+            </div>
+            <div class="flow-step step-amber">
+                <div class="flow-title">Step 4: Examine the Wire (3 mins)</div>
+                <p class="flow-body">Open <code>reasoning.py</code> lines 77-80: Inspect the post-LLM guardrail where deterministic code overrides model output when confidence falls below the calibrated threshold. Then show <code>audit_trail.jsonl</code> to demonstrate enterprise compliance and traceability.</p>
+            </div>
+        </section>
+
+        <!-- DIRECTORY -->
+        <section id="directory">
+            <h2>
+                <span class="sec-icon">📂</span>
+                File Reference
+            </h2>
+            <pre class="tree-pre"><code>customer-support-agent-demo/
+├── GUIDE.md                    &larr; Markdown version of this guide
+├── session_2_support_agent_guide.html  &larr; This HTML document
+├── requirements.txt            &larr; google-genai, chromadb, pydantic
+├── knowledge-base/
+│   ├── refund-policy.md        &larr; ≤$50 auto, $50-$200 approval, >$200 escalate
+│   ├── escalation-rules.md     &larr; Conditions for mandatory human escalation
+│   ├── password-reset.md       &larr; Reset procedure & limitations
+│   └── billing-faq.md          &larr; Billing questions & payment rules
+└── src/
+    ├── config.py               &larr; Business constants (thresholds, model, API key)
+    ├── perception.py           &larr; 👂 Intent + sentiment + entity extraction
+    ├── memory.py               &larr; 📚 ChromaDB vector store + retrieval
+    ├── reasoning.py            &larr; 🧠 Decision engine + confidence guardrail
+    ├── action.py               &larr; ⚡ Resolve / Escalate + audit trail
+    └── main.py                 &larr; 🎬 Runs 6 test cases through pipeline</code></pre>
+        </section>
+
+    </main>
+
+</body>
+</html>

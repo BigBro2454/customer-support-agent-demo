@@ -1,0 +1,35 @@
+# Environment & Secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ChromaDB & Vector Store Persistence
+chroma_db/
+*.sqlite3
+*.parquet
+
+# Python Bytecode & Cache
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Virtual Environments
+.venv/
+venv/
+env/
+ENV/
+
+# Audit Trails & Runtime Logs
+logs/
+*.log
+*.jsonl
+
+# Operating System Files
+.DS_Store
+Thumbs.db
