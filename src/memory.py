@@ -1,4 +1,10 @@
 import os
+os.environ["ANONYMIZED_TELEMETRY"] = "False"
+try:
+    import chromadb.telemetry.product.posthog as _th
+    _th.Posthog.capture = lambda *args, **kwargs: None
+except Exception:
+    pass
 import glob
 import chromadb
 try:
@@ -84,3 +90,30 @@ class MemoryModule:
         # Extract the document strings from the results
         documents = results["documents"][0] if results["documents"] else []
         return documents
+
+    def retrieve_with_metadata(self, query: str, n_results: int = 2) -> list[dict]:
+        """
+        Retrieves top-k documents along with structured metadata (source filename, id, distance).
+        Used by the quantitative RAG evaluation harness to evaluate retrieval recall and precision.
+        """
+        results = self.collection.query(
+            query_texts=[query],
+            n_results=n_results
+        )
+        
+        items = []
+        docs = results.get("documents", [[]])[0] if results.get("documents") else []
+        metas = results.get("metadatas", [[]])[0] if results.get("metadatas") else []
+        ids = results.get("ids", [[]])[0] if results.get("ids") else []
+        distances = results.get("distances", [[]])[0] if results.get("distances") else []
+        
+        for i in range(len(docs)):
+            item = {
+                "id": ids[i] if i < len(ids) else f"doc_{i}",
+                "content": docs[i],
+                "source": metas[i].get("source", "unknown") if i < len(metas) else "unknown",
+                "distance": distances[i] if i < len(distances) else None
+            }
+            items.append(item)
+            
+        return items
