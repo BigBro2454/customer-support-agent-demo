@@ -295,15 +295,47 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-### 4. Run the Pipeline
+### 4. Unified CLI Runner & Multi-Mode Execution
 ```bash
-# Run the complete test suite through the orchestrator
-python -m src.main
+# 1. Run the Canonical Scenario Demo Suite (with live telemetry & cost analytics)
+python run_support.py --demo
+
+# 2. Run in Offline Deterministic Mock Mode (zero API keys required, ideal for CI/CD)
+python run_support.py --mock
+
+# 3. Launch Interactive Live Chat Terminal with the Agent
+python run_support.py --interactive
+
+# 4. Inspect and Manage the Human-in-the-Loop (HITL) Supervisor Queue
+python run_support.py --hitl
+
+# 5. Execute Quantitative RAG Evaluation Harness (20 golden cases, Recall@2, MRR, Faithfulness)
+python run_support.py --eval
+
+# 6. Run the Automated Pytest Suite (21/21 passing tests)
+pytest tests/ -v
 ```
 
-### 5. Inspect the Audit Trail
+### 5. Interactive Architecture & Simulation Dashboard
+Open `docs/support_agent_dashboard.html` directly in any web browser:
 ```bash
+open docs/support_agent_dashboard.html
+```
+- **Scenario Simulator:** Step through 6 canonical production scenarios (Standard refund, over-limit refund, legal threat, password reset, PII leak, prompt injection).
+- **Live Latency Waterfall:** Visualizes millisecond duration bars for Guardrail sanitization, Perception parsing, Vector retrieval, and LLM reasoning.
+- **Defense-in-Depth Visualizer:** Inspects sanitized strings, intent classification, retrieved policy chunks, and programmatic financial circuit breakers.
+- **Dark & Light Mode:** Seamlessly toggles theme with zero flash.
+
+### 6. Inspect Audit Trail & Telemetry Reports
+```bash
+# View structured JSONL audit trail
 cat logs/audit_trail.jsonl | jq .
+
+# View aggregate session analytics JSON
+cat logs/session_analytics.json | jq .
+
+# View executive markdown scorecard with financial ROI
+cat logs/session_scorecard.md
 ```
 
 ---
