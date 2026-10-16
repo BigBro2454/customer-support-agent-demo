@@ -1,0 +1,117 @@
+{
+  "timestamp": 1792162622.8682702,
+  "engine": "Support AI Economics Benchmarker v0.3.0",
+  "workloads_evaluated": 4,
+  "fleet_average_p95_latency_ms": 73.36,
+  "annual_500k_tickets_roi": {
+    "human_support_cost_usd": 3250000.0,
+    "gemini_2_5_flash_cost_usd": 97.21,
+    "claude_3_5_sonnet_cost_usd": 4327.5,
+    "gpt_4o_cost_usd": 3240.62,
+    "annual_savings_vs_human_usd": 3249902.79,
+    "annual_savings_vs_claude_usd": 4230.29,
+    "net_cost_reduction": ">99.9% vs Human, >97.2% vs Claude"
+  },
+  "workloads": [
+    {
+      "workload_id": "tier1_standard_faq",
+      "workload_name": "Tier-1 FAQ & Vector Knowledge Retrieval",
+      "iterations": 10,
+      "latency": {
+        "min_ms": 39.06,
+        "mean_ms": 42.77,
+        "max_ms": 45.94,
+        "p50_ms": 43.67,
+        "p95_ms": 45.94
+      },
+      "tokens": {
+        "prompt": 820,
+        "completion": 195,
+        "total": 1015
+      },
+      "economics_per_1k_tickets": {
+        "gemini_2_5_flash_usd": 0.12,
+        "claude_3_5_sonnet_usd": 5.385,
+        "gpt_4o_usd": 4.0,
+        "human_agent_baseline_usd": 6500.0,
+        "gemini_cost_savings_vs_claude": "97.8%",
+        "human_deflection_roi_factor": "54,166x"
+      }
+    },
+    {
+      "workload_id": "financial_dispute_hitl",
+      "workload_name": "Complex Order Dispute & Financial Gating",
+      "iterations": 10,
+      "latency": {
+        "min_ms": 78.12,
+        "mean_ms": 84.77,
+        "max_ms": 90.88,
+        "p50_ms": 85.75,
+        "p95_ms": 90.88
+      },
+      "tokens": {
+        "prompt": 1580,
+        "completion": 360,
+        "total": 1940
+      },
+      "economics_per_1k_tickets": {
+        "gemini_2_5_flash_usd": 0.2265,
+        "claude_3_5_sonnet_usd": 10.14,
+        "gpt_4o_usd": 7.55,
+        "human_agent_baseline_usd": 6500.0,
+        "gemini_cost_savings_vs_claude": "97.8%",
+        "human_deflection_roi_factor": "28,697x"
+      }
+    },
+    {
+      "workload_id": "threat_guardrail_neutralization",
+      "workload_name": "Adversarial Threat & Injection Interception",
+      "iterations": 10,
+      "latency": {
+        "min_ms": 15.35,
+        "mean_ms": 17.27,
+        "max_ms": 18.66,
+        "p50_ms": 17.42,
+        "p95_ms": 18.66
+      },
+      "tokens": {
+        "prompt": 940,
+        "completion": 95,
+        "total": 1035
+      },
+      "economics_per_1k_tickets": {
+        "gemini_2_5_flash_usd": 0.099,
+        "claude_3_5_sonnet_usd": 4.245,
+        "gpt_4o_usd": 3.3,
+        "human_agent_baseline_usd": 6500.0,
+        "gemini_cost_savings_vs_claude": "97.7%",
+        "human_deflection_roi_factor": "65,656x"
+      }
+    },
+    {
+      "workload_id": "multi_turn_policy_reasoning",
+      "workload_name": "Multi-Turn Conversational Policy REPL",
+      "iterations": 10,
+      "latency": {
+        "min_ms": 119.04,
+        "mean_ms": 128.77,
+        "max_ms": 137.96,
+        "p50_ms": 129.75,
+        "p95_ms": 137.96
+      },
+      "tokens": {
+        "prompt": 2350,
+        "completion": 520,
+        "total": 2870
+      },
+      "economics_per_1k_tickets": {
+        "gemini_2_5_flash_usd": 0.3322,
+        "claude_3_5_sonnet_usd": 14.85,
+        "gpt_4o_usd": 11.075,
+        "human_agent_baseline_usd": 6500.0,
+        "gemini_cost_savings_vs_claude": "97.8%",
+        "human_deflection_roi_factor": "19,566x"
+      }
+    }
+  ]
+}
