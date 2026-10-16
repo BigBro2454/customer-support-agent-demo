@@ -18,12 +18,16 @@ __pycache__/
 .pytest_cache/
 .coverage
 htmlcov/
+*.egg-info/
+dist/
+build/
 
 # Virtual Environments
 .venv/
 venv/
 env/
 ENV/
+uv.lock
 
 # Audit Trails & Runtime Logs
 logs/

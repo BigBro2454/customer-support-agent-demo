@@ -1,0 +1,64 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "customer-support-agent-demo"
+version = "0.3.0"
+description = "Autonomous customer support agent with safety-grounded RAG, multi-stage guardrails, incident triage clustering, and token economics benchmarking"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [
+    { name = "Ishan Dhiman", email = "product.ishand03@gmail.com" }
+]
+keywords = [
+    "customer-support",
+    "google-genai",
+    "chromadb",
+    "rag",
+    "incident-triage",
+    "security-guardrails",
+    "human-in-the-loop",
+    "token-economics",
+    "benchmarking",
+    "gemini"
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence"
+]
+dependencies = [
+    "google-genai>=0.3.0",
+    "chromadb>=0.5.20",
+    "pydantic>=2.0.0",
+    "python-dotenv>=1.0.0",
+    "pytest>=8.0.0",
+    "tabulate>=0.9.0"
+]
+
+[project.urls]
+Homepage = "https://github.com/BigBro2454/customer-support-agent-demo"
+Repository = "https://github.com/BigBro2454/customer-support-agent-demo"
+
+[project.scripts]
+customer-support = "run_support:main"
+
+[tool.setuptools]
+py-modules = [
+    "run_support"
+]
+packages = [
+    "src",
+    "evals"
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src", "evals", "."]
+testpaths = ["tests"]
